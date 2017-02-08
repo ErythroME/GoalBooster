@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
+import boosterApp from './reducers'
+import SceneContainer from './containers/SceneContainer'
+
+
+const store = createStore(boosterApp)
 
 export default class App extends Component {
   render() {
     return (
-      <View>
-        <Text>Goal Booster</Text>
-      </View>
+      <Provider store={store}>
+        <SceneContainer />
+      </Provider>
     )
   }
 }

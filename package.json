@@ -1,32 +1,34 @@
 {
-	"name": "GoalBooster",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-        "ios": "react-native run-ios",
-        "android": "react-native run-android",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "15.4.2",
-		"react-native": "0.41.1"
-	},
-	"devDependencies": {
-		"babel-jest": "18.0.0",
-		"babel-preset-react-native": "1.9.1",
-		"jest": "18.1.0",
-		"react-test-renderer": "15.4.2"
-	},
-	"jest": {
-		"preset": "react-native"
-	},
-    "author": "megas.nmsis@hotmail.com",
-    "license": "MIT",
-    "description": "Assistant that helps me achieving my annual goals",
-    "main": "index.ios.js",
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/ErythroME/GoalBooster.git"
-    }
+  "name": "GoalBooster",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "15.4.2",
+    "react-native": "0.41.1",
+    "react-redux": "5.0.2",
+    "redux": "3.6.0"
+  },
+  "devDependencies": {
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "18.1.0",
+    "react-test-renderer": "15.4.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "author": "megas.nmsis@hotmail.com",
+  "license": "MIT",
+  "description": "Assistant that helps me achieving my annual goals",
+  "main": "index.ios.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErythroME/GoalBooster.git"
+  }
 }
