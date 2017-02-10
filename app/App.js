@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, combineReduxers, compose } from 'redux'
 import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
 import boosterApp from './reducers'
-import SceneContainer from './containers/SceneContainer'
+import GoalBoosterContainer from './containers/GoalBoosterContainer'
 
 
-const store = createStore(boosterApp)
+const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__ })
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <SceneContainer />
-      </Provider>
-    )
-  }
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(thunkMiddleware, loggerMiddleware)
+  )
+  return createStore(boosterApp, initialState, enhancer)
 }
+
+const store = configureStore({})
+
+const App = () => (
+  <Provider store={store}>
+    <GoalBoosterContainer />
+  </Provider>
+)
+
+export default App

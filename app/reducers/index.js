@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
 
-import goals from './goals'
+import * as recipesReducer from './recipes'
 
 
-const boosterApp = combineReducers({
-  goals
-})
+const boosterApp = combineReducers(Object.assign({}, recipesReducer))
 
 export default boosterApp
