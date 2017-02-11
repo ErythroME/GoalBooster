@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { ActionCreators } from '../actions'
+import theme from '../theme'
 
 
 class GoalBooster extends Component {
   render() {
+    const { styles } = theme
     return (
-      <View style={{marginTop: 30}}>
+      <View style={styles.container}>
         <Text>Hello GoalBooster!</Text>
       </View>
     )
