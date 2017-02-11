@@ -4,15 +4,24 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { ActionCreators } from '../actions'
+import Header from '../components/Header'
+import GoalList from '../components/GoalList'
 import theme from '../theme'
 
 
 class GoalBooster extends Component {
   render() {
     const { styles } = theme
+    const goals = [{
+      id: 0,
+      name: 'Learn TypeScript',
+      createAt: new Date(),
+      achieved: false
+    }]
     return (
       <View style={styles.container}>
-        <Text>Hello GoalBooster!</Text>
+        <Header />
+        <GoalList goals={goals} />
       </View>
     )
   }

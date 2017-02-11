@@ -16,7 +16,7 @@ export default class Goal extends Component {
     return (
       <View>
         <Text>{this.props.name}</Text>
-      <View>
+      </View>
     )
   }
 }

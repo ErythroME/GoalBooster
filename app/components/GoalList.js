@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
 
 import Goal from './Goal'
+import theme from '../theme'
 
 
 const ds = new ListView.DataSource({
@@ -21,8 +22,9 @@ export default class GoalList extends Component {
   }
 
   render() {
+    const { styles } = theme
     return (
-      <View>
+      <View style={styles.goalList}>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
