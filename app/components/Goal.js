@@ -4,7 +4,7 @@ import {
   Text
 } from 'react-native'
 
-import { theme } from '../theme'
+import theme from '../theme'
 
 
 export default class Goal extends Component {
@@ -13,9 +13,11 @@ export default class Goal extends Component {
   }
 
   render() {
+    const { name } = this.props.goal
+    const { styles } = theme
     return (
-      <View>
-        <Text>{this.props.name}</Text>
+      <View style={styles.goalItem}>
+        <Text>{name}</Text>
       </View>
     )
   }
