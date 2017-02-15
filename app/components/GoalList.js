@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
-import { View, ListView } from 'react-native'
+import {
+  View,
+  ListView,
+  Text,
+  TouchableHighlight
+} from 'react-native'
 
 import Goal from './Goal'
+import theme from '../theme'
 
 
 const ds = new ListView.DataSource({
@@ -14,19 +20,45 @@ export default class GoalList extends Component {
 
     this.state = { dataSource: ds.cloneWithRows(props.goals) }
     this.renderRow = this.renderRow.bind(this)
+    this.addGoal = this.addGoal.bind(this)
+    this.updateDataSource = this.updateDataSource.bind(this)
   }
 
   renderRow(goal) {
     return <Goal goal={goal} />
   }
 
+  updateDataSource(goals) {
+    this.setState({
+      dataSource: ds.cloneWithRows(goals)
+    })
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.updateDataSource(newProps.goals)
+  }
+
+  addGoal() {
+    this.props.addGoal({
+      id: 3,
+      name: 'Test'
+    })
+  }
+
   render() {
+    const { styles } = theme
     return (
-      <View>
+      <View style={styles.goalList}>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
         />
+        <View >
+          <TouchableHighlight style={styles.addButton}
+            onPress={this.addGoal}>
+            <Text style={styles.addButtonText}>Add a goal</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     )
   }
