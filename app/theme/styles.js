@@ -31,17 +31,18 @@ const styles = StyleSheet.create({
     height: height - HEADER_HEIGHT,
     backgroundColor: 'ghostwhite'
   },
-  addButtonText: {
+  addTodoText: {
     color: colors.colorButtonText,
     fontSize: 18
   },
-  addButton: {
+  addTodo: {
     width,
     height: BUTTON_HEIGHT,
     alignItems:'center',
     justifyContent: 'center',
-    borderTopWidth: 0.5,
-    borderColor: '#ddd'
+    borderBottomWidth: 0.5,
+    borderColor: '#ddd',
+    flexDirection: 'row'
   },
   goalItem: {
     height: BUTTON_HEIGHT,
@@ -49,6 +50,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderColor: '#eee',
     paddingLeft: 15
+  },
+  goalInput: {
+    width: width - 30,
+    height: BUTTON_HEIGHT - 10,
+    borderWidth: 1,
+    borderColor: 'transparent',
+    borderRadius: 3,
+    backgroundColor: '#fff',
+    marginTop: 5
   }
 })
 
