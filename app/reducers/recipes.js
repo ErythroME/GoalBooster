@@ -15,7 +15,8 @@ const defaultGoals = [
     achieved: false
   }
 ]
-export const addGoalRecipes = createReducer(defaultGoals, {
+
+export const goalRecipes = createReducer(defaultGoals, {
   [types.ADD_GOAL](state, action) {
     const { id, name } = action.payload
     return [
@@ -27,5 +28,12 @@ export const addGoalRecipes = createReducer(defaultGoals, {
         achieved: false
       }
     ]
+  },
+  [types.DELETE_GOAL](state, action) {
+    const index = action.payload
+    return [
+      ...state.slice(0, index), ...state.slice(index + 1)
+    ]
   }
 })
+

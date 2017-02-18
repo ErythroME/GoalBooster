@@ -59,6 +59,12 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: '#fff',
     marginTop: 5
+  },
+  editButton: {
+    backgroundColor: 'blue'
+  },
+  swipeoutStyles: {
+    backgroundColor: 'transparent'
   }
 })
 

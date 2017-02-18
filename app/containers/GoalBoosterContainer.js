@@ -23,14 +23,15 @@ class GoalBooster extends Component {
       <View style={styles.container}>
         <Header />
         <GoalList goals={this.props.goals}
-                  addGoal={this.props.addGoal} />
+                  addGoal={this.props.addGoal}
+                  deleteGoal={this.props.deleteGoal} />
       </View>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return { goals: state.addGoalRecipes }
+  return { goals: state.goalRecipes }
 }
 
 function mapDispatchToProps(dispatch) {

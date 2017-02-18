@@ -3,22 +3,33 @@ import {
   View,
   Text
 } from 'react-native'
+import Swipeout from 'react-native-swipeout'
 
 import theme from '../theme'
 
 
-export default class Goal extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    const { name } = this.props.goal
-    const { styles } = theme
-    return (
+const Goal = ({ goal, deleteGoal }) => {
+  const { id, name } = goal
+  const { styles } = theme
+  const swipeoutButtons = [
+    {
+      text: 'Edit',
+      backgroundColor: 'lightseagreen'
+    },
+    {
+      text: 'Delete',
+      backgroundColor: 'salmon',
+      onPress: () => deleteGoal(id)
+    }
+  ]
+  return (
+    <Swipeout style={styles.swipeoutStyles}
+              right={swipeoutButtons}>
       <View style={styles.goalItem}>
         <Text>{name}</Text>
       </View>
-    )
-  }
+    </Swipeout>
+  )
 }
+
+export default Goal

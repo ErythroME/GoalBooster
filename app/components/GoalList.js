@@ -32,7 +32,8 @@ export default class GoalList extends Component {
   }
 
   renderRow(goal) {
-    return <Goal goal={goal} />
+    return <Goal goal={goal}
+                 deleteGoal={this.props.deleteGoal} />
   }
 
   renderAddTodo(styles) {
@@ -70,9 +71,9 @@ export default class GoalList extends Component {
 
   addGoal(event) {
     const goalText = event.nativeEvent.text
-    const currentTotal = this.props.goals.length
+    const currentId = this.props.goals.length
     this.props.addGoal({
-      id: currentTotal + 1,
+      id: currentId,
       name: goalText
     })
     this.setState({
