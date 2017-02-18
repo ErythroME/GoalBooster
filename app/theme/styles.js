@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
     height: height - HEADER_HEIGHT,
     backgroundColor: 'ghostwhite'
   },
-  addTodoText: {
+  addGoalText: {
     color: colors.colorButtonText,
     fontSize: 18
   },
-  addTodo: {
+  addGoal: {
     width,
     height: BUTTON_HEIGHT,
     alignItems:'center',
