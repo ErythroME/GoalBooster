@@ -7,3 +7,10 @@ export function addGoal(payload) {
     payload
   }
 }
+
+export function deleteGoal(payload) {
+  return {
+    type: types.DELETE_GOAL,
+    payload
+  }
+}
