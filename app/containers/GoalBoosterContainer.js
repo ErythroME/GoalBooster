@@ -24,6 +24,7 @@ class GoalBooster extends Component {
         <Header />
         <GoalList goals={this.props.goals}
                   addGoal={this.props.addGoal}
+                  editGoal={this.props.editGoal}
                   deleteGoal={this.props.deleteGoal} />
       </View>
     )

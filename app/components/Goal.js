@@ -1,35 +1,86 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text
+  Text,
+  TextInput
 } from 'react-native'
 import Swipeout from 'react-native-swipeout'
 
 import theme from '../theme'
 
 
-const Goal = ({ goal, deleteGoal }) => {
-  const { id, name } = goal
-  const { styles } = theme
-  const swipeoutButtons = [
-    {
-      text: 'Edit',
-      backgroundColor: 'lightseagreen'
-    },
-    {
-      text: 'Delete',
-      backgroundColor: 'salmon',
-      onPress: () => deleteGoal(id)
+export default class Goal extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isTextShown: true,
+      text: props.goal.name
     }
-  ]
-  return (
-    <Swipeout style={styles.swipeoutStyles}
-              right={swipeoutButtons}>
+    this.toggleView = this.toggleView.bind(this)
+    this.editGoal = this.editGoal.bind(this)
+    this.renderText = this.renderText.bind(this)
+    this.renderInput = this.renderInput.bind(this)
+  }
+
+  toggleView() {
+    this.setState({ isTextShown: !this.state.isTextShown })
+  }
+
+  editGoal(event) {
+    const id = this.props.goal.id
+    const name = event.nativeEvent.text
+    this.props.editGoal({ id, name })
+    this.setState({
+      isTextShown: true,
+      text: name
+    })
+  }
+
+  renderText(styles) {
+    const { id, name } = this.props.goal
+    const swipeoutButtons = [
+      {
+        text: 'Edit',
+        backgroundColor: 'lightseagreen',
+        onPress: () => this.toggleView()
+      },
+      {
+        text: 'Delete',
+        backgroundColor: 'salmon',
+        onPress: () => this.props.deleteGoal(id)
+      }
+    ]
+    return(
+      <Swipeout style={styles.swipeoutStyles}
+                autoClose={true}
+                right={swipeoutButtons}>
+        <View style={styles.goalItem}>
+          <Text>{name}</Text>
+        </View>
+      </Swipeout>
+    )
+  }
+
+  renderInput(styles) {
+    return (
       <View style={styles.goalItem}>
-        <Text>{name}</Text>
+        <TextInput style={styles.goalInput}
+                   onChangeText={text => this.setState({text})}
+                   onSubmitEditing={event => this.editGoal(event)}
+                   value={this.state.text}>
+        </TextInput>
       </View>
-    </Swipeout>
-  )
+    )
+  }
+
+  render() {
+    const { styles } = theme
+    if (this.state.isTextShown) {
+      return this.renderText(styles)
+    } else {
+      return this.renderInput(styles)
+    }
+  }
 }
 
-export default Goal

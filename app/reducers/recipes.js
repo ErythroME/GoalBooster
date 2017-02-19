@@ -34,6 +34,18 @@ export const goalRecipes = createReducer(defaultGoals, {
     return [
       ...state.slice(0, index), ...state.slice(index + 1)
     ]
+  },
+  [types.EDIT_GOAL](state, action) {
+    const { id, name } = action.payload
+    return [
+      ...state.slice(0, id), {
+        id,
+        name,
+        createAt: new Date(),
+        achieved: false
+      },
+      ...state.slice(id + 1)
+    ]
   }
 })
 
