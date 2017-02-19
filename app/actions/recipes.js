@@ -14,3 +14,10 @@ export function deleteGoal(payload) {
     payload
   }
 }
+
+export function editGoal(payload) {
+  return {
+    type: types.EDIT_GOAL,
+    payload
+  }
+}

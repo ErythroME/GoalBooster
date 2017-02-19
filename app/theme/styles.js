@@ -38,13 +38,13 @@ const styles = StyleSheet.create({
   addGoal: {
     width,
     height: BUTTON_HEIGHT,
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
-    borderColor: '#ddd',
-    flexDirection: 'row'
+    borderColor: '#ddd'
   },
   goalItem: {
+    width,
     height: BUTTON_HEIGHT,
     justifyContent: 'center',
     borderBottomWidth: 0.5,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderRadius: 3,
     backgroundColor: '#fff',
-    marginTop: 5
+    alignSelf: 'center'
   },
   editButton: {
     backgroundColor: 'blue'

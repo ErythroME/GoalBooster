@@ -20,22 +20,19 @@ export default class GoalList extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      dataSource: ds.cloneWithRows(props.goals)
-    }
+    this.state = { dataSource: ds.cloneWithRows(props.goals) }
     this.renderRow = this.renderRow.bind(this)
     this.updateDataSource = this.updateDataSource.bind(this)
   }
 
   renderRow(goal) {
     return <Goal goal={goal}
+                 editGoal={this.props.editGoal}
                  deleteGoal={this.props.deleteGoal} />
   }
 
   updateDataSource(goals) {
-    this.setState({
-      dataSource: ds.cloneWithRows(goals)
-    })
+    this.setState({ dataSource: ds.cloneWithRows(goals) })
   }
 
   componentWillReceiveProps(newProps) {
@@ -49,8 +46,7 @@ export default class GoalList extends Component {
         <AddGoalContainer />
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
-        />
+          renderRow={this.renderRow} />
       </View>
     )
   }
