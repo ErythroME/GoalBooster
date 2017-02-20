@@ -7,6 +7,7 @@ import {
 import Swipeout from 'react-native-swipeout'
 
 import theme from '../theme'
+import Checkbox from './Checkbox'
 
 
 export default class Goal extends Component {
@@ -21,6 +22,7 @@ export default class Goal extends Component {
     this.editGoal = this.editGoal.bind(this)
     this.renderText = this.renderText.bind(this)
     this.renderInput = this.renderInput.bind(this)
+    this.handleGoalCheck = this.handleGoalCheck.bind(this)
   }
 
   toggleView() {
@@ -56,10 +58,16 @@ export default class Goal extends Component {
                 autoClose={true}
                 right={swipeoutButtons}>
         <View style={styles.goalItem}>
+          <Checkbox targetId={id}
+                    handleCheck={this.handleGoalCheck}/>
           <Text>{name}</Text>
         </View>
       </Swipeout>
     )
+  }
+
+  handleGoalCheck(id, state) {
+    console.log(`goal ${id} checked ${state}`)
   }
 
   renderInput(styles) {
