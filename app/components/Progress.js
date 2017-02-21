@@ -9,7 +9,7 @@ export default class Header extends Component {
     const { styles } = theme
     return (
       <View style={styles.header}>
-        <Text style={styles.headerText}>20%</Text>
+        <Text style={styles.headerText}>{this.props.progress}%</Text>
       </View>
     )
   }

@@ -46,6 +46,29 @@ export const goalRecipes = createReducer(defaultGoals, {
       },
       ...state.slice(id + 1)
     ]
+  },
+  [types.ACHIEVE_GOAL](state, action) {
+    const id = action.payload
+    const targetGoal = state[id]
+    return [
+      ...state.slice(0, id), { ...targetGoal, achieved: true }, ...state.slice(id + 1)
+    ]
+  },
+  [types.RESET_GOAL](state, action) {
+    const id = action.payload
+    const targetGoal = state[id]
+    return [
+      ...state.slice(0, id), { ...targetGoal, achieved: false }, ...state.slice(id + 1)
+    ]
+  }
+})
+
+export const progressRecipes = createReducer(0, {
+  [types.INCREMENT_PROGRESS](state, action) {
+    return state + 1
+  },
+  [types.DECREMENT_PROGRESS](state, action) {
+    return state - 1
   }
 })
 

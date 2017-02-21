@@ -7,7 +7,7 @@ import {
   TouchableHighlight
 } from 'react-native'
 
-import Goal from './Goal'
+import GoalContainer from '../containers/GoalContainer'
 import AddGoalContainer from '../containers/AddGoalContainer'
 import theme from '../theme'
 
@@ -26,9 +26,7 @@ export default class GoalList extends Component {
   }
 
   renderRow(goal) {
-    return <Goal goal={goal}
-                 editGoal={this.props.editGoal}
-                 deleteGoal={this.props.deleteGoal} />
+    return <GoalContainer goal={goal} />
   }
 
   updateDataSource(goals) {
