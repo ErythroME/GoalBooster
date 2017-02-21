@@ -4,12 +4,16 @@ import {
   Text,
   TextInput
 } from 'react-native'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Swipeout from 'react-native-swipeout'
 
+import { ActionCreators } from '../actions'
 import theme from '../theme'
+import Checkbox from '../components/Checkbox'
 
 
-export default class Goal extends Component {
+class Goal extends Component {
   constructor(props) {
     super(props)
 
@@ -21,6 +25,7 @@ export default class Goal extends Component {
     this.editGoal = this.editGoal.bind(this)
     this.renderText = this.renderText.bind(this)
     this.renderInput = this.renderInput.bind(this)
+    this.handleGoalCheck = this.handleGoalCheck.bind(this)
   }
 
   toggleView() {
@@ -56,10 +61,20 @@ export default class Goal extends Component {
                 autoClose={true}
                 right={swipeoutButtons}>
         <View style={styles.goalItem}>
+          <Checkbox targetId={id}
+                    handleCheck={this.handleGoalCheck}/>
           <Text>{name}</Text>
         </View>
       </Swipeout>
     )
+  }
+
+  handleGoalCheck(id, state) {
+    if (state) {
+      this.props.achieveGoal(id)
+    } else {
+      this.props.resetGoal(id)
+    }
   }
 
   renderInput(styles) {
@@ -83,4 +98,10 @@ export default class Goal extends Component {
     }
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Goal)
 

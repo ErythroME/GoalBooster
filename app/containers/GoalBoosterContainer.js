@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { ActionCreators } from '../actions'
-import Header from '../components/Header'
+import Progress from '../components/Progress'
 import GoalList from '../components/GoalList'
 import theme from '../theme'
 
@@ -21,18 +21,18 @@ class GoalBooster extends Component {
     const { styles } = theme
     return (
       <View style={styles.container}>
-        <Header />
-        <GoalList goals={this.props.goals}
-                  addGoal={this.props.addGoal}
-                  editGoal={this.props.editGoal}
-                  deleteGoal={this.props.deleteGoal} />
+        <Progress progress={this.props.progress}/>
+        <GoalList goals={this.props.goals} />
       </View>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return { goals: state.goalRecipes }
+  return {
+    goals: state.goalRecipes,
+    progress: state.progressRecipes
+  }
 }
 
 function mapDispatchToProps(dispatch) {

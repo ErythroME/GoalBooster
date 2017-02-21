@@ -21,3 +21,29 @@ export function editGoal(payload) {
     payload
   }
 }
+
+export function achieveGoal(payload) {
+  return {
+    type: types.ACHIEVE_GOAL,
+    payload
+  }
+}
+
+export function resetGoal(payload) {
+  return {
+    type: types.RESET_GOAL,
+    payload
+  }
+}
+
+export function incrementProgress() {
+  return {
+    type: types.INCREMENT_PROGRESS
+  }
+}
+
+export function decrementProgress() {
+  return {
+    type: types.DECREMENT_PROGRESS
+  }
+}

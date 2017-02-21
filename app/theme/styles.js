@@ -44,12 +44,13 @@ const styles = StyleSheet.create({
     borderColor: '#ddd'
   },
   goalItem: {
-    width,
+    width: width - 70,
     height: BUTTON_HEIGHT,
-    justifyContent: 'center',
+    alignItems: 'center',
     borderBottomWidth: 0.5,
     borderColor: '#eee',
-    paddingLeft: 15
+    paddingLeft: 15,
+    flexDirection: 'row'
   },
   goalInput: {
     width: width - 30,
@@ -65,6 +66,11 @@ const styles = StyleSheet.create({
   },
   swipeoutStyles: {
     backgroundColor: 'transparent'
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    marginRight: 5
   }
 })
 
