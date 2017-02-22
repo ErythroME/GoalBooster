@@ -63,12 +63,39 @@ export const goalRecipes = createReducer(defaultGoals, {
   }
 })
 
-export const progressRecipes = createReducer(0, {
-  [types.INCREMENT_PROGRESS](state, action) {
-    return state + 1
+const initialProgressObj = {
+  total: 2,
+  achieved: 0
+}
+export const progressRecipes = createReducer(initialProgressObj, {
+  [types.ADD_GOAL](state, action) {
+    const { achieved, total } = state
+    return {
+      ...state,
+      total: total + 1
+    }
   },
-  [types.DECREMENT_PROGRESS](state, action) {
-    return state - 1
+  [types.DELETE_GOAL](state, action) {
+    const { achieved, total } = state
+    return {
+      ...state,
+      total: total - 1
+    }
+  },
+
+  [types.ACHIEVE_GOAL](state, action) {
+    const { achieved, total } = state
+    return {
+      ...state,
+      achieved: achieved + 1
+    }
+  },
+  [types.RESET_GOAL](state, action) {
+    const { achieved, total } = state
+    return {
+      ...state,
+      achieved: achieved - 1
+    }
   }
 })
 
