@@ -26,7 +26,9 @@ export default class GoalList extends Component {
   }
 
   renderRow(goal) {
-    return <GoalContainer goal={goal} />
+    const key = `goal-${goal.id}`
+    return <GoalContainer key={key}
+                          goal={goal} />
   }
 
   updateDataSource(goals) {

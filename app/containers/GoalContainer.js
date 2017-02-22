@@ -62,7 +62,8 @@ class Goal extends Component {
                 right={swipeoutButtons}>
         <View style={styles.goalItem}>
           <Checkbox targetId={id}
-                    handleCheck={this.handleGoalCheck}/>
+                    handleCheck={this.handleGoalCheck}
+                    isChecked={this.props.goal.achieved} />
           <Text>{name}</Text>
         </View>
       </Swipeout>

@@ -12,7 +12,7 @@ export default class Checkbox extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { isChecked: false }
+    this.state = { isChecked: this.props.isChecked }
     this.renderImage = this.renderImage.bind(this)
     this.toggleState = this.toggleState.bind(this)
   }
