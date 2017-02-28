@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   View,
   Text,
@@ -79,3 +79,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddGoal)
+
+AddGoal.propTypes = {
+  addGoal: PropTypes.func.isRequired,
+  goals: PropTypes.array.isRequired
+}

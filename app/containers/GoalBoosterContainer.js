@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   View,
   Text
@@ -42,3 +42,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoalBooster)
+
+GoalBooster.propTypes = {
+  goals: PropTypes.array.isRequired,
+  progress: PropTypes.number.isRequired
+}

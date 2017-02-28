@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   View,
   Text,
@@ -106,3 +106,14 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(null, mapDispatchToProps)(Goal)
 
+Goal.proptypes = {
+  achieveGoal: PropTypes.func.isRequired,
+  resetGoal: PropTypes.func.isRequired,
+  editGoal: PropTypes.func.isRequired,
+  deleteGoal: PropTypes.func.isRequired,
+  goal: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    achieved: PropTypes.bool.isRequired
+  })
+}
