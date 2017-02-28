@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   TouchableHighlight,
   View,
@@ -41,4 +41,10 @@ export default class Checkbox extends Component {
       </TouchableHighlight>
     )
   }
+}
+
+Checkbox.propTypes = {
+  handleCheck: PropTypes.func.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  targetId: PropTypes.number.isRequired
 }

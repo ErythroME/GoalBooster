@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   View,
   ListView,
@@ -51,3 +51,8 @@ export default class GoalList extends Component {
     )
   }
 }
+
+GoalList.propTypes = {
+  goals: PropTypes.array.isRequired
+}
+
