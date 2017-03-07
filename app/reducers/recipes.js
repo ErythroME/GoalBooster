@@ -18,7 +18,8 @@ const defaultGoals = [
 
 export const goalRecipes = createReducer(defaultGoals, {
   [types.ADD_GOAL](state, action) {
-    const { id, name } = action.payload
+    const name = action.payload
+    const id = state.length
     return [
       ...state,
       {
@@ -30,22 +31,20 @@ export const goalRecipes = createReducer(defaultGoals, {
     ]
   },
   [types.DELETE_GOAL](state, action) {
-    const index = action.payload
-    return [
-      ...state.slice(0, index), ...state.slice(index + 1)
-    ]
+    const index = action.payload.id
+    const currentState = [ ...state ]
+    const removed = currentState.splice(index, 1)
+    return currentState
   },
   [types.EDIT_GOAL](state, action) {
     const { id, name } = action.payload
-    return [
-      ...state.slice(0, id), {
-        id,
-        name,
-        createAt: new Date(),
-        achieved: false
-      },
-      ...state.slice(id + 1)
-    ]
+    const currentState = [ ...state ]
+    const removed = currentState.splice(id, 1)
+    const { createAt, achieved } = removed[0]
+    const temp = currentState.splice(id, 0, {
+      id, name, createAt, achieved
+    })
+    return currentState
   },
   [types.ACHIEVE_GOAL](state, action) {
     const id = action.payload
@@ -77,8 +76,10 @@ export const progressRecipes = createReducer(initialProgressObj, {
   },
   [types.DELETE_GOAL](state, action) {
     const { achieved, total } = state
+    const isGoalAchieved = action.payload.achieved
+    const currentAchieved = isGoalAchieved ? achieved - 1 : achieved
     return {
-      ...state,
+      achieved: currentAchieved,
       total: total - 1
     }
   },
