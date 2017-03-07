@@ -82,6 +82,7 @@ class Goal extends Component {
     return (
       <View style={styles.goalItem}>
         <TextInput style={styles.goalInput}
+                   autoFocus={true}
                    onChangeText={text => this.setState({text})}
                    onSubmitEditing={event => this.editGoal(event)}
                    value={this.state.text}>
@@ -115,5 +116,5 @@ Goal.proptypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     achieved: PropTypes.bool.isRequired
-  })
+  }).isRequired
 }

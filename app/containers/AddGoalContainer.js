@@ -33,12 +33,16 @@ class AddGoal extends Component {
   addGoal(event) {
     const id = this.props.goals.length
     const name = event.nativeEvent.text
-    this.props.addGoal({ id, name })
-    this.setState({
-      text: '',
-      isButtonShown: !this.state.isButtonShown
-    })
-  }
+    if (name) {
+      this.props.addGoal({ id, name })
+      this.setState({
+        text: '',
+        isButtonShown: !this.state.isButtonShown
+      })
+    } else {
+      this.toggleView()
+    }
+}
 
   renderButton(styles) {
     return (
@@ -51,6 +55,7 @@ class AddGoal extends Component {
   renderInput(styles) {
     return (
       <TextInput style={styles.goalInput}
+                 autoFocus={true}
                  onChangeText={text => this.setState({text})}
                  onSubmitEditing={event => this.addGoal(event)}
                  value={this.state.text}>
