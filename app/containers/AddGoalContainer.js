@@ -31,10 +31,9 @@ class AddGoal extends Component {
   }
 
   addGoal(event) {
-    const id = this.props.goals.length
     const name = event.nativeEvent.text
     if (name) {
-      this.props.addGoal({ id, name })
+      this.props.addGoal(name)
       this.setState({
         text: '',
         isButtonShown: !this.state.isButtonShown

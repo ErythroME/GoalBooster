@@ -26,6 +26,7 @@ class Goal extends Component {
     this.renderText = this.renderText.bind(this)
     this.renderInput = this.renderInput.bind(this)
     this.handleGoalCheck = this.handleGoalCheck.bind(this)
+    this.handleGoalDelete = this.handleGoalDelete.bind(this)
   }
 
   toggleView() {
@@ -53,7 +54,7 @@ class Goal extends Component {
       {
         text: 'Delete',
         backgroundColor: 'salmon',
-        onPress: () => this.props.deleteGoal(id)
+        onPress: () => this.handleGoalDelete(id)
       }
     ]
     return(
@@ -76,6 +77,10 @@ class Goal extends Component {
     } else {
       this.props.resetGoal(id)
     }
+  }
+
+  handleGoalDelete(id) {
+    this.props.deleteGoal({ id, achieved: this.props.goal.achieved })
   }
 
   renderInput(styles) {
