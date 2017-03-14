@@ -27,8 +27,9 @@ export default class GoalList extends Component {
 
   renderRow(goal) {
     const key = `goal-${goal.id}`
-    return <GoalContainer key={key}
-                          goal={goal} />
+    return <GoalContainer
+              key={key}
+              goal={goal} />
   }
 
   updateDataSource(goals) {
@@ -46,7 +47,8 @@ export default class GoalList extends Component {
         <AddGoalContainer />
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow} />
+          renderRow={this.renderRow}
+          enableEmptySections={true} />
       </View>
     )
   }

@@ -30,7 +30,7 @@ class GoalBooster extends Component {
 
 function mapStateToProps(state) {
   const { achieved, total } = state.progressRecipes
-  const progress = Math.round((achieved / total) * 100)
+  const progress = total === 0 ? 0 : Math.round((achieved / total) * 100)
   return {
     goals: state.goalRecipes,
     progress
