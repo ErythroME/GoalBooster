@@ -16,10 +16,23 @@ const defaultGoals = [
   }
 ]
 
+let maxIndex = 1
+const findGoalIndexById = (goals, id) => goals.findIndex(goal => goal.id === id)
+const toggleGoalState = (state, action) => {
+  const index = findGoalIndexById(state, action.payload)
+  const targetGoal = state[index]
+  const currentAchievedState = targetGoal.achieved
+  return [
+    ...state.slice(0, index),
+    { ...targetGoal, achieved: !currentAchievedState },
+    ...state.slice(index + 1)
+  ]
+}
+
 export const goalRecipes = createReducer(defaultGoals, {
   [types.ADD_GOAL](state, action) {
     const name = action.payload
-    const id = state.length
+    const id = ++maxIndex
     return [
       ...state,
       {
@@ -31,34 +44,28 @@ export const goalRecipes = createReducer(defaultGoals, {
     ]
   },
   [types.DELETE_GOAL](state, action) {
-    const index = action.payload.id
+    const targetId = action.payload.id
+    const index = findGoalIndexById(state, targetId)
     const currentState = [ ...state ]
     const removed = currentState.splice(index, 1)
     return currentState
   },
   [types.EDIT_GOAL](state, action) {
     const { id, name } = action.payload
+    const index = findGoalIndexById(state, id)
     const currentState = [ ...state ]
-    const removed = currentState.splice(id, 1)
+    const removed = currentState.splice(index, 1)
     const { createAt, achieved } = removed[0]
-    const temp = currentState.splice(id, 0, {
+    const temp = currentState.splice(index, 0, {
       id, name, createAt, achieved
     })
     return currentState
   },
   [types.ACHIEVE_GOAL](state, action) {
-    const id = action.payload
-    const targetGoal = state[id]
-    return [
-      ...state.slice(0, id), { ...targetGoal, achieved: true }, ...state.slice(id + 1)
-    ]
+    return toggleGoalState(state, action)
   },
   [types.RESET_GOAL](state, action) {
-    const id = action.payload
-    const targetGoal = state[id]
-    return [
-      ...state.slice(0, id), { ...targetGoal, achieved: false }, ...state.slice(id + 1)
-    ]
+    return toggleGoalState(state, action)
   }
 })
 
