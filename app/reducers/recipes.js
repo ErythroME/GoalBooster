@@ -18,6 +18,16 @@ const defaultGoals = [
 
 let maxIndex = 1
 const findGoalIndexById = (goals, id) => goals.findIndex(goal => goal.id === id)
+const toggleGoalState = (state, action) => {
+  const index = findGoalIndexById(state, action.payload)
+  const targetGoal = state[index]
+  const currentAchievedState = targetGoal.achieved
+  return [
+    ...state.slice(0, index),
+    { ...targetGoal, achieved: !currentAchievedState },
+    ...state.slice(index + 1)
+  ]
+}
 
 export const goalRecipes = createReducer(defaultGoals, {
   [types.ADD_GOAL](state, action) {
@@ -52,20 +62,10 @@ export const goalRecipes = createReducer(defaultGoals, {
     return currentState
   },
   [types.ACHIEVE_GOAL](state, action) {
-    const id = action.payload
-    const index = findGoalIndexById(state, id)
-    const targetGoal = state[index]
-    return [
-      ...state.slice(0, index), { ...targetGoal, achieved: true }, ...state.slice(index + 1)
-    ]
+    return toggleGoalState(state, action)
   },
   [types.RESET_GOAL](state, action) {
-    const id = action.payload
-    const index = findGoalIndexById(state, id)
-    const targetGoal = state[index]
-    return [
-      ...state.slice(0, index), { ...targetGoal, achieved: false }, ...state.slice(index + 1)
-    ]
+    return toggleGoalState(state, action)
   }
 })
 
