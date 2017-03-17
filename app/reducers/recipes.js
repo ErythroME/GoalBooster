@@ -2,21 +2,7 @@ import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 
 
-const defaultGoals = [
-  {
-    id: 0,
-    name: 'Learn TypeScript',
-    createAt: new Date(),
-    achieved: false
-  }, {
-    id: 1,
-    name: 'Read React Native Tutorials',
-    createAt: new Date(),
-    achieved: false
-  }
-]
-
-let maxIndex = 1
+let maxIndex = 0
 const findGoalIndexById = (goals, id) => goals.findIndex(goal => goal.id === id)
 const toggleGoalState = (state, action) => {
   const index = findGoalIndexById(state, action.payload)
@@ -29,43 +15,77 @@ const toggleGoalState = (state, action) => {
   ]
 }
 
-export const goalRecipes = createReducer(defaultGoals, {
+const initialState = {
+  fetching: false,
+  fetched: false,
+  goals: [],
+  error: null
+}
+export const goalRecipes = createReducer(initialState, {
+  [types.REQUEST_GOALS](state, action) {
+    return { ...state, fetching: true }
+  },
+  [types.REQUEST_GOALS_ERROR](state, action) {
+    return {
+      ...state,
+      fetching: false,
+      error: action.payload
+    }
+  },
+  [types.RECEIVE_GOALS](state, action) {
+    return {
+      ...state,
+      fetching: false,
+      fetched: true,
+      goals: action.payload
+    }
+  },
   [types.ADD_GOAL](state, action) {
     const name = action.payload
-    const id = ++maxIndex
-    return [
+    const id = maxIndex++
+    return {
       ...state,
-      {
-        id,
-        name,
-        createAt: new Date(),
-        achieved: false
-      }
-    ]
+      goals: [
+        ...state.goals,
+        {
+          id, name,
+          createAt: new Date(),
+          achieved: false
+        }
+      ]
+    }
   },
   [types.DELETE_GOAL](state, action) {
     const targetId = action.payload.id
-    const index = findGoalIndexById(state, targetId)
-    const currentState = [ ...state ]
-    const removed = currentState.splice(index, 1)
-    return currentState
+    const goals = state.goals
+    const index = findGoalIndexById(goals, targetId)
+    const currentGoals = [ ...goals ]
+    const removed = currentGoals.splice(index, 1)
+    return { ...state, goals: currentGoals }
   },
   [types.EDIT_GOAL](state, action) {
     const { id, name } = action.payload
     const index = findGoalIndexById(state, id)
-    const currentState = [ ...state ]
-    const removed = currentState.splice(index, 1)
+    const goals = state.goals
+    const currentGoals = [ ...goals ]
+    const removed = currentGoals.splice(index, 1)
     const { createAt, achieved } = removed[0]
-    const temp = currentState.splice(index, 0, {
+    const temp = currentGoals.splice(index, 0, {
       id, name, createAt, achieved
     })
-    return currentState
+    return { ...state, goals: currentGoals }
   },
   [types.ACHIEVE_GOAL](state, action) {
-    return toggleGoalState(state, action)
+    return {
+      ...state,
+      goals: toggleGoalState(state.goals, action)
+    }
   },
   [types.RESET_GOAL](state, action) {
-    return toggleGoalState(state, action)
+    return {
+      ...state,
+      goals: toggleGoalState(state.goals, action)
+    }
   }
 })
 

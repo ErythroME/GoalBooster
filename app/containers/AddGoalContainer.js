@@ -75,7 +75,7 @@ class AddGoal extends Component {
 }
 
 function mapStateToProps(state) {
-  return { goals: state.goalRecipes }
+  return { goals: state.goalRecipes.goals }
 }
 
 function mapDispatchToProps(dispatch) {
