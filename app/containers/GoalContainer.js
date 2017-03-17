@@ -58,13 +58,16 @@ class Goal extends Component {
       }
     ]
     return(
-      <Swipeout style={styles.swipeoutStyles}
-                autoClose={true}
-                right={swipeoutButtons}>
+      <Swipeout
+        style={styles.swipeoutStyles}
+        autoClose={true}
+        right={swipeoutButtons}>
         <View style={styles.goalItem}>
-          <Checkbox targetId={id}
-                    handleCheck={this.handleGoalCheck}
-                    isChecked={this.props.goal.achieved} />
+          <Checkbox
+            targetId={id}
+            handleCheck={this.handleGoalCheck}
+            isChecked={this.props.goal.achieved}
+          />
           <Text>{name}</Text>
         </View>
       </Swipeout>
@@ -86,12 +89,13 @@ class Goal extends Component {
   renderInput(styles) {
     return (
       <View style={styles.goalItem}>
-        <TextInput style={styles.goalInput}
-                   autoFocus={true}
-                   onChangeText={text => this.setState({text})}
-                   onSubmitEditing={event => this.editGoal(event)}
-                   value={this.state.text}>
-        </TextInput>
+        <TextInput
+          style={styles.goalInput}
+          autoFocus={true}
+          onChangeText={text => this.setState({text})}
+          onSubmitEditing={event => this.editGoal(event)}
+          value={this.state.text}
+        />
       </View>
     )
   }

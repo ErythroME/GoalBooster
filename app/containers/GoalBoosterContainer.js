@@ -23,20 +23,14 @@ class GoalBooster extends Component {
 
   render() {
     const { styles } = theme
-    const content = () => {
-      return this.props.isFetching ?
-          <Text>Loading Goals...</Text> :
-          (
-            <View>
-              <GoalList goals={this.props.goals} />
-            </View>
-          )
-    }
+    const content = this.props.isFetching
+      ? <Text>Loading Goals...</Text>
+      : <GoalList goals={this.props.goals} />
 
     return (
       <View style={styles.container}>
         <Progress progress={this.props.progress}/>
-        {content()}
+        {content}
       </View>
     )
   }

@@ -53,11 +53,12 @@ class AddGoal extends Component {
 
   renderInput(styles) {
     return (
-      <TextInput style={styles.goalInput}
-                 autoFocus={true}
-                 onChangeText={text => this.setState({text})}
-                 onSubmitEditing={event => this.addGoal(event)}
-                 value={this.state.text}>
+      <TextInput
+        style={styles.goalInput}
+        autoFocus={true}
+        onChangeText={text => this.setState({text})}
+        onSubmitEditing={event => this.addGoal(event)}
+        value={this.state.text}>
       </TextInput>
     )
   }
