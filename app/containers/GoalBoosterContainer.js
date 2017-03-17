@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import {
-  AsyncStorage,
   View,
   Text
 } from 'react-native'
@@ -12,8 +11,6 @@ import Progress from '../components/Progress'
 import GoalList from '../components/GoalList'
 import theme from '../theme'
 
-
-const STORAGE_KEY = 'GoolBoosterStorage'
 
 class GoalBooster extends Component {
   constructor(props) {
@@ -40,9 +37,6 @@ class GoalBooster extends Component {
       <View style={styles.container}>
         <Progress progress={this.props.progress}/>
         {content()}
-        {/*
-        <GoalList goals={this.props.goals} />
-        */}
       </View>
     )
   }
