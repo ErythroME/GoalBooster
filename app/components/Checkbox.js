@@ -34,9 +34,10 @@ export default class Checkbox extends Component {
   render() {
     const { styles } = theme
     return (
-      <TouchableHighlight style={styles.checkboxContainer}
-                          onPress={this.toggleState}
-                          underlayColor='transparent'>
+      <TouchableHighlight
+        style={styles.checkboxContainer}
+        onPress={this.toggleState}
+        underlayColor='transparent'>
         {this.renderImage(styles)}
       </TouchableHighlight>
     )

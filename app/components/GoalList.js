@@ -29,7 +29,8 @@ export default class GoalList extends Component {
     const key = `goal-${goal.id}`
     return <GoalContainer
               key={key}
-              goal={goal} />
+              goal={goal}
+           />
   }
 
   updateDataSource(goals) {
