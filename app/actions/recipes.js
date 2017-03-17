@@ -1,5 +1,44 @@
+import { AsyncStorage } from 'react-native'
 import * as types from './types'
 
+
+const STORAGE_KEY = 'GoalBoosterStorage'
+export function fetchGoals() {
+  return async function(dispatch) {
+    dispatch(requestGoals())
+    try {
+      const value = await AsyncStorage.getItem(STORAGE_KEY)
+      if (value !== null) {
+        console.log('get initial value')
+      } else {
+        console.log('get null')
+      }
+      dispatch(receiveGoals(value || []))
+    } catch (err) {
+      console.log('AsyncStorage error: ${err.message}')
+    }
+  }
+}
+
+function requestGoals() {
+  return {
+    type: types.REQUEST_GOALS
+  }
+}
+
+function receiveGoals(payload) {
+  return {
+    type: types.RECEIVE_GOALS,
+    payload
+  }
+}
+
+function requestGoalsError(payload) {
+  return {
+    type: types.REQUEST_GOALS_ERROR,
+    payload
+  }
+}
 
 export function addGoal(payload) {
   return {

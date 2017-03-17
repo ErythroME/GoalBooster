@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "ios:release": "react-native run-ios --configuration Release",
     "android": "react-native run-android",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean"
   },
   "dependencies": {
     "react": "15.4.2",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "babel-jest": "18.0.0",
+    "babel-plugin-transform-class-properties": "6.23.0",
     "babel-preset-react-native": "1.9.1",
     "jest": "18.1.0",
     "react-test-renderer": "15.4.2",
