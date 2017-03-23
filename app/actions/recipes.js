@@ -1,19 +1,36 @@
 import { AsyncStorage } from 'react-native'
 import * as types from './types'
+import * as keys from '../lib/storageKeys'
 
 
-const STORAGE_KEY = 'GoalBoosterStorage'
 export function fetchGoals() {
+  // AsyncStorage.clear()
   return async function(dispatch) {
     dispatch(requestGoals())
     try {
-      const value = await AsyncStorage.getItem(STORAGE_KEY)
-      if (value !== null) {
-        console.log('get initial value')
-      } else {
-        console.log('get null')
-      }
-      dispatch(receiveGoals(value || []))
+      await AsyncStorage.getAllKeys((err, keysArr) => {
+        if (!keysArr.length) {
+          dispatch(receiveGoals([]))
+          dispatch(receiveProgress({}))
+          return
+        }
+        AsyncStorage.multiGet(keysArr, (err, stores) => {
+          stores.map((result, i, store) => {
+            const key = store[i][0]
+            const value = store[i][1]
+            switch (key) {
+              case keys.GOALS_STORAGE_KEY:
+                dispatch(receiveGoals(JSON.parse(value) || []))
+                break
+              case keys.PROGRESS_STORAGE_KEY:
+                dispatch(receiveProgress(JSON.parse(value)))
+                break
+              default:
+                break
+            }
+          })
+        })
+      })
     } catch (err) {
       console.log('AsyncStorage error: ${err.message}')
     }
@@ -29,6 +46,13 @@ function requestGoals() {
 function receiveGoals(payload) {
   return {
     type: types.RECEIVE_GOALS,
+    payload
+  }
+}
+
+function receiveProgress(payload) {
+  return {
+    type: types.RECEIVE_PROGRESS,
     payload
   }
 }

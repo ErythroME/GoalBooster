@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {
+  AsyncStorage,
   View,
   ListView,
   Text,
@@ -10,6 +11,7 @@ import {
 import GoalContainer from '../containers/GoalContainer'
 import AddGoalContainer from '../containers/AddGoalContainer'
 import theme from '../theme'
+import { GOALS_STORAGE_KEY } from '../lib/storageKeys'
 
 
 const ds = new ListView.DataSource({
@@ -23,6 +25,7 @@ export default class GoalList extends Component {
     this.state = { dataSource: ds.cloneWithRows(props.goals) }
     this.renderRow = this.renderRow.bind(this)
     this.updateDataSource = this.updateDataSource.bind(this)
+    this.updateStorage = this.updateStorage.bind(this)
   }
 
   renderRow(goal) {
@@ -34,7 +37,16 @@ export default class GoalList extends Component {
   }
 
   updateDataSource(goals) {
+    this.updateStorage(goals)
     this.setState({ dataSource: ds.cloneWithRows(goals) })
+  }
+
+  async updateStorage(goals) {
+    try {
+      await AsyncStorage.setItem(GOALS_STORAGE_KEY, JSON.stringify(goals))
+    } catch(error) {
+      console.log('error')
+    }
   }
 
   componentWillReceiveProps(newProps) {
