@@ -1,8 +1,10 @@
+import { AsyncStorage } from 'react-native'
+
 import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
+import * as keys from '../lib/storageKeys'
 
 
-let maxIndex = 0
 const findGoalIndexById = (goals, id) => goals.findIndex(goal => goal.id === id)
 const toggleGoalState = (state, action) => {
   const index = findGoalIndexById(state, action.payload)
@@ -14,6 +16,23 @@ const toggleGoalState = (state, action) => {
     ...state.slice(index + 1)
   ]
 }
+
+const getMaxIndex = async () => {
+  try {
+    return await AsyncStorage.getItem(keys.INDEX_STORAGE_KEY)
+  } catch (err) {
+    console.log(`AsyncStorage error: ${err.message}`)
+  }
+}
+const updateMaxIndex = async (index) => {
+  try {
+    await AsyncStorage.setItem(keys.INDEX_STORAGE_KEY, JSON.stringify(index))
+  } catch (err) { console.log(`AsyncStorage error: ${err.message}`) }
+}
+let maxIndex = 0
+getMaxIndex().then((value) => {
+  maxIndex = value
+})
 
 const initialState = {
   fetching: false,
@@ -37,12 +56,13 @@ export const goalRecipes = createReducer(initialState, {
       ...state,
       fetching: false,
       fetched: true,
-      goals: action.payload
+      goals: action.payload || []
     }
   },
   [types.ADD_GOAL](state, action) {
     const name = action.payload
     const id = maxIndex++
+    updateMaxIndex(maxIndex)
     return {
       ...state,
       goals: [
@@ -90,40 +110,45 @@ export const goalRecipes = createReducer(initialState, {
 })
 
 const initialProgressObj = {
-  total: 2,
+  total: 0,
   achieved: 0
 }
+const updateProgressStorage = async (progressObj) => {
+  try {
+    await AsyncStorage.setItem(keys.PROGRESS_STORAGE_KEY, JSON.stringify(progressObj))
+  } catch(err) { `AsyncStorage error: ${err.message}` }
+}
 export const progressRecipes = createReducer(initialProgressObj, {
+  [types.RECEIVE_PROGRESS](state, action) {
+    const progressObj = action.payload.total ? action.payload : state
+    return { ...progressObj }
+  },
   [types.ADD_GOAL](state, action) {
     const { achieved, total } = state
-    return {
-      ...state,
-      total: total + 1
-    }
+    const nextProgress = { ...state, total: total + 1 }
+    updateProgressStorage(nextProgress)
+    return nextProgress
   },
   [types.DELETE_GOAL](state, action) {
     const { achieved, total } = state
     const isGoalAchieved = action.payload.achieved
     const currentAchieved = isGoalAchieved ? achieved - 1 : achieved
-    return {
-      achieved: currentAchieved,
-      total: total - 1
-    }
+    const nextProgress = { achieved: currentAchieved, total: total - 1 }
+    updateProgressStorage(nextProgress)
+    return nextProgress
   },
 
   [types.ACHIEVE_GOAL](state, action) {
     const { achieved, total } = state
-    return {
-      ...state,
-      achieved: achieved + 1
-    }
+    const nextProgress = { ...state, achieved: achieved + 1 }
+    updateProgressStorage(nextProgress)
+    return nextProgress
   },
   [types.RESET_GOAL](state, action) {
     const { achieved, total } = state
-    return {
-      ...state,
-      achieved: achieved - 1
-    }
+    const nextProgress = { ...state, achieved: achieved - 1 }
+    updateProgressStorage(nextProgress)
+    return nextProgress
   }
 })
 
