@@ -1,5 +1,5 @@
 # GoalBooster
-An iOS app based on React Native to help me achieving my annual targets.
+An iOS app based on React Native to help me achive my annual targets.
 
 ## Installation
 

@@ -380,7 +380,7 @@ babel-plugin-syntax-trailing-function-commas@^6.20.0, babel-plugin-syntax-traili
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.22.0.tgz#ba0360937f8d06e40180a43fe0d5616fff532cf3"
 
-babel-plugin-transform-class-properties@^6.5.0, babel-plugin-transform-class-properties@^6.6.0, babel-plugin-transform-class-properties@^6.8.0:
+babel-plugin-transform-class-properties@6.23.0, babel-plugin-transform-class-properties@^6.5.0, babel-plugin-transform-class-properties@^6.6.0, babel-plugin-transform-class-properties@^6.8.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-class-properties/-/babel-plugin-transform-class-properties-6.23.0.tgz#187b747ee404399013563c993db038f34754ac3b"
   dependencies:
@@ -2518,13 +2518,13 @@ mime-db@~1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.23.0.tgz#a31b4070adaea27d732ea333740a64d0ec9a6659"
 
-mime-types@2.1.11, mime-types@~2.1.7:
+mime-types@2.1.11, mime-types@~2.1.7, mime-types@~2.1.9:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.11.tgz#c259c471bda808a85d6cd193b430a5fae4473b3c"
   dependencies:
     mime-db "~1.23.0"
 
-mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6, mime-types@~2.1.9:
+mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6:
   version "2.1.14"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.14.tgz#f7ef7d97583fcaf3b7d282b6f8b5679dab1e94ee"
   dependencies:
@@ -2932,6 +2932,12 @@ react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
+react-native-keyboard-aware-scroll-view@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.2.7.tgz#dd344cec25284b6314f1cc9d1b75ba267483c6b6"
+  dependencies:
+    react-timer-mixin "^0.13.3"
+
 "react-native-swipeout@https://github.com/dancormier/react-native-swipeout.git":
   version "2.0.12"
   resolved "https://github.com/dancormier/react-native-swipeout.git#829b7c01ba969cd70509944bc210289b759d48a6"
@@ -3042,7 +3048,7 @@ react-test-renderer@15.4.2:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
-react-timer-mixin@^0.13.2:
+react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
 
@@ -3740,11 +3746,7 @@ whatwg-encoding@^1.0.1:
   dependencies:
     iconv-lite "0.4.13"
 
-whatwg-fetch@>=0.10.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
-
-whatwg-fetch@^1.0.0:
+whatwg-fetch@>=0.10.0, whatwg-fetch@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-1.1.1.tgz#ac3c9d39f320c6dce5339969d054ef43dd333319"
 

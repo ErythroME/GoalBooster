@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import {
   AsyncStorage,
-  View,
   ListView,
+  View,
   Text,
   TextInput,
   TouchableHighlight
 } from 'react-native'
+import { KeyboardAwareListView } from 'react-native-keyboard-aware-scroll-view'
 
 import GoalContainer from '../containers/GoalContainer'
 import AddGoalContainer from '../containers/AddGoalContainer'
@@ -58,7 +59,7 @@ export default class GoalList extends Component {
     return (
       <View style={styles.goalList}>
         <AddGoalContainer />
-        <ListView
+        <KeyboardAwareListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
           enableEmptySections={true} />
@@ -70,4 +71,3 @@ export default class GoalList extends Component {
 GoalList.propTypes = {
   goals: PropTypes.array.isRequired
 }
-
