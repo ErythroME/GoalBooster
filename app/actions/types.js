@@ -3,6 +3,9 @@ export const REQUEST_GOALS = 'REQUEST_GOALS'
 export const REQUEST_GOALS_ERROR = 'REQUEST_GOALS_ERROR'
 export const RECEIVE_GOALS = 'RECEIVE_GOALS'
 
+export const CLEAR_STORAGE = 'CLEAR_STORAGE'
+export const CLEAR_PROGRESS = 'CLEAR_PROGRESS'
+
 export const ADD_GOAL = 'ADD_GOAL'
 export const DELETE_GOAL = 'DELETE_GOAL'
 export const EDIT_GOAL = 'EDIT_GOAL'

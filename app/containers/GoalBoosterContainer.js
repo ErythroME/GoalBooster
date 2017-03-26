@@ -26,7 +26,7 @@ class GoalBooster extends Component {
     const content = this.props.isFetching
       ? <Text>Loading Goals...</Text>
       : <GoalList
-          fetchGoals={this.props.fetchGoals}
+          clearStorage={this.props.clearStorage}
           goals={this.props.goals} />
 
     return (

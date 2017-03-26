@@ -28,7 +28,6 @@ export default class GoalList extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.updateDataSource = this.updateDataSource.bind(this)
     this.updateStorage = this.updateStorage.bind(this)
-    this.clearStorage = this.clearStorage.bind(this)
   }
 
   renderRow(goal) {
@@ -52,15 +51,6 @@ export default class GoalList extends Component {
     }
   }
 
-  async clearStorage() {
-    try {
-      await AsyncStorage.clear()
-      this.props.fetchGoals()
-    } catch(error) {
-      console.log('error when clear Storage.')
-    }
-  }
-
   componentWillReceiveProps(newProps) {
     this.updateDataSource(newProps.goals)
   }
@@ -69,7 +59,7 @@ export default class GoalList extends Component {
     const { styles } = theme
     return (
       <View style={styles.goalList}>
-        <ClearStorageButton clearStorage={this.clearStorage} />
+        <ClearStorageButton clearStorage={this.props.clearStorage} />
         <AddGoalContainer />
         <KeyboardAwareListView
           dataSource={this.state.dataSource}
@@ -81,5 +71,6 @@ export default class GoalList extends Component {
 }
 
 GoalList.propTypes = {
+  clearStorage: PropTypes.func.isRequired,
   goals: PropTypes.array.isRequired
 }

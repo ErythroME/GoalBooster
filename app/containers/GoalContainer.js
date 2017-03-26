@@ -35,7 +35,7 @@ class Goal extends Component {
 
   editGoal(event) {
     const id = this.props.goal.id
-    const name = event.nativeEvent.text
+    const name = event.nativeEvent.text.trim()
     this.props.editGoal({ id, name })
     this.setState({
       isTextShown: true,
