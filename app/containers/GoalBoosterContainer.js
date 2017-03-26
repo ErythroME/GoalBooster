@@ -25,7 +25,9 @@ class GoalBooster extends Component {
     const { styles } = theme
     const content = this.props.isFetching
       ? <Text>Loading Goals...</Text>
-      : <GoalList goals={this.props.goals} />
+      : <GoalList
+          fetchGoals={this.props.fetchGoals}
+          goals={this.props.goals} />
 
     return (
       <View style={styles.container}>

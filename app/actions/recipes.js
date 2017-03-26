@@ -4,7 +4,6 @@ import * as keys from '../lib/storageKeys'
 
 
 export function fetchGoals() {
-  // AsyncStorage.clear()
   return async function(dispatch) {
     dispatch(requestGoals())
     try {
