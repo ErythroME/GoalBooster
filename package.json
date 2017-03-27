@@ -7,13 +7,16 @@
     "ios": "react-native run-ios",
     "ios:release": "react-native run-ios --configuration Release",
     "android": "react-native run-android",
-    "test": "jest",
+    "test": "jest --verbose",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "dependencies": {
     "react": "15.4.2",
     "react-native": "0.41.1",
-    "react-native-keyboard-aware-scroll-view": "^0.2.7",
+    "react-native-keyboard-aware-scroll-view": "0.2.7",
     "react-native-swipeout": "https://github.com/dancormier/react-native-swipeout.git",
     "react-redux": "5.0.2",
     "redux": "3.6.0",
@@ -24,15 +27,14 @@
     "babel-plugin-transform-class-properties": "6.23.0",
     "babel-preset-react-native": "1.9.1",
     "jest": "18.1.0",
+    "jest-react-native": "18.0.0",
+    "mock-async-storage": "1.0.3",
     "react-test-renderer": "15.4.2",
     "redux-logger": "2.8.1"
   },
-  "jest": {
-    "preset": "react-native"
-  },
   "author": "megas.nmsis@hotmail.com",
   "license": "MIT",
-  "description": "Assistant that helps me achieving my annual goals",
+  "description": "Assistant that helps me achieve my annual goals",
   "main": "index.ios.js",
   "repository": {
     "type": "git",
