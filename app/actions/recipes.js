@@ -4,7 +4,6 @@ import * as keys from '../lib/storageKeys'
 
 
 export function fetchGoals() {
-  // AsyncStorage.clear()
   return async function(dispatch) {
     dispatch(requestGoals())
     try {
@@ -32,81 +31,65 @@ export function fetchGoals() {
         })
       })
     } catch (err) {
-      console.log('AsyncStorage error: ${err.message}')
+      console.log(`AsyncStorage error: ${err.message}`)
     }
   }
 }
 
 function requestGoals() {
-  return {
-    type: types.REQUEST_GOALS
-  }
+  return { type: types.REQUEST_GOALS }
 }
 
 function receiveGoals(payload) {
-  return {
-    type: types.RECEIVE_GOALS,
-    payload
-  }
+  return { type: types.RECEIVE_GOALS, payload }
 }
 
 function receiveProgress(payload) {
-  return {
-    type: types.RECEIVE_PROGRESS,
-    payload
-  }
+  return { type: types.RECEIVE_PROGRESS, payload }
 }
 
 function requestGoalsError(payload) {
-  return {
-    type: types.REQUEST_GOALS_ERROR,
-    payload
+  return { type: types.REQUEST_GOALS_ERROR, payload }
+}
+
+export function clearStorage() {
+  return async function(dispatch) {
+    try {
+      await AsyncStorage.clear()
+      dispatch(clearProgress())
+      dispatch(fetchGoals())
+    } catch (err) { console.log(`AsyncStorage error: ${err.message}`) }
   }
 }
 
 export function addGoal(payload) {
-  return {
-    type: types.ADD_GOAL,
-    payload
-  }
+  return { type: types.ADD_GOAL, payload }
 }
 
 export function deleteGoal(payload) {
-  return {
-    type: types.DELETE_GOAL,
-    payload
-  }
+  return { type: types.DELETE_GOAL, payload }
 }
 
 export function editGoal(payload) {
-  return {
-    type: types.EDIT_GOAL,
-    payload
-  }
+  return { type: types.EDIT_GOAL, payload }
 }
 
 export function achieveGoal(payload) {
-  return {
-    type: types.ACHIEVE_GOAL,
-    payload
-  }
+  return { type: types.ACHIEVE_GOAL, payload }
 }
 
 export function resetGoal(payload) {
-  return {
-    type: types.RESET_GOAL,
-    payload
-  }
+  return { type: types.RESET_GOAL, payload }
+}
+
+function clearProgress() {
+  return { type: types.CLEAR_PROGRESS }
 }
 
 export function incrementProgress() {
-  return {
-    type: types.INCREMENT_PROGRESS
-  }
+  return { type: types.INCREMENT_PROGRESS }
 }
 
 export function decrementProgress() {
-  return {
-    type: types.DECREMENT_PROGRESS
-  }
+  return { type: types.DECREMENT_PROGRESS }
 }

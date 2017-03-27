@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import {
   AsyncStorage,
-  View,
   ListView,
+  View,
   Text,
   TextInput,
   TouchableHighlight
 } from 'react-native'
+import { KeyboardAwareListView } from 'react-native-keyboard-aware-scroll-view'
 
 import GoalContainer from '../containers/GoalContainer'
 import AddGoalContainer from '../containers/AddGoalContainer'
+import ClearStorageButton from './ClearStorageButton'
 import theme from '../theme'
 import { GOALS_STORAGE_KEY } from '../lib/storageKeys'
 
@@ -57,8 +59,9 @@ export default class GoalList extends Component {
     const { styles } = theme
     return (
       <View style={styles.goalList}>
+        <ClearStorageButton clearStorage={this.props.clearStorage} />
         <AddGoalContainer />
-        <ListView
+        <KeyboardAwareListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
           enableEmptySections={true} />
@@ -68,6 +71,6 @@ export default class GoalList extends Component {
 }
 
 GoalList.propTypes = {
+  clearStorage: PropTypes.func.isRequired,
   goals: PropTypes.array.isRequired
 }
-

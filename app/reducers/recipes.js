@@ -85,8 +85,8 @@ export const goalRecipes = createReducer(initialState, {
   },
   [types.EDIT_GOAL](state, action) {
     const { id, name } = action.payload
-    const index = findGoalIndexById(state, id)
     const goals = state.goals
+    const index = findGoalIndexById(goals, id)
     const currentGoals = [ ...goals ]
     const removed = currentGoals.splice(index, 1)
     const { createAt, achieved } = removed[0]
@@ -123,6 +123,9 @@ export const progressRecipes = createReducer(initialProgressObj, {
     const progressObj = action.payload.total ? action.payload : state
     return { ...progressObj }
   },
+  [types.CLEAR_PROGRESS](state, action){
+    return { ...initialProgressObj }
+  },
   [types.ADD_GOAL](state, action) {
     const { achieved, total } = state
     const nextProgress = { ...state, total: total + 1 }
@@ -151,4 +154,3 @@ export const progressRecipes = createReducer(initialProgressObj, {
     return nextProgress
   }
 })
-

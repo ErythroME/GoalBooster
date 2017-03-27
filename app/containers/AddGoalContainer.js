@@ -31,7 +31,7 @@ class AddGoal extends Component {
   }
 
   addGoal(event) {
-    const name = event.nativeEvent.text
+    const name = event.nativeEvent.text.trim()
     if (name) {
       this.props.addGoal(name)
       this.setState({
