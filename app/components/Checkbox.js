@@ -1,46 +1,42 @@
-import React, { Component, PropTypes } from 'react'
-import {
-  TouchableHighlight,
-  View,
-  Image
-} from 'react-native'
+import React, { Component, PropTypes } from "react";
+import { TouchableHighlight, View, Image } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
-import theme from '../theme'
-
+import theme from "../theme";
 
 export default class Checkbox extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = { isChecked: this.props.isChecked }
-    this.renderImage = this.renderImage.bind(this)
-    this.toggleState = this.toggleState.bind(this)
-  }
-
-  renderImage(styles) {
-    const source = this.state.isChecked
-                   ? require('../assets/check_checked.png')
-                   : require('../assets/check.png')
-    return (
-      <Image style={styles.checkbox} source={source} />
-    )
+    this.state = { isChecked: this.props.isChecked };
+    this.toggleState = this.toggleState.bind(this);
   }
 
   toggleState() {
-    this.props.handleCheck(this.props.targetId, !this.state.isChecked)
-    this.setState({ isChecked: !this.state.isChecked })
+    this.props.handleCheck(this.props.targetId, !this.state.isChecked);
+    this.setState({ isChecked: !this.state.isChecked });
   }
 
   render() {
-    const { styles } = theme
+    const { styles } = theme;
     return (
       <TouchableHighlight
-        style={styles.checkboxContainer}
         onPress={this.toggleState}
-        underlayColor='transparent'>
-        {this.renderImage(styles)}
+        underlayColor="transparent"
+      >
+        {this.state.isChecked
+          ? <Icon
+              name="ios-checkmark-circle"
+              size={20}
+              style={[styles.checkbox, styles.checkboxChecked]}
+            />
+          : <Icon
+              name="ios-checkmark-circle-outline"
+              size={20}
+              style={styles.checkbox}
+            />}
       </TouchableHighlight>
-    )
+    );
   }
 }
 
@@ -48,4 +44,4 @@ Checkbox.propTypes = {
   handleCheck: PropTypes.func.isRequired,
   isChecked: PropTypes.bool.isRequired,
   targetId: PropTypes.number.isRequired
-}
+};
