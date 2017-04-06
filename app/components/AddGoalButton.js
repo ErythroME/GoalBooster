@@ -4,31 +4,27 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import theme from "../theme";
 
-const ClearStorageButton = ({ clearStorage }) => {
+const AddGoalButton = ({ onButtonClick }) => {
   const { styles } = theme;
   return (
     <View
       style={[
         styles.circleFixedButtonContainer,
-        styles.circleFixedButtonContainerRight
+        styles.circleFixedButtonContainerLeft
       ]}
     >
       <TouchableHighlight
         style={styles.circleFixedButtonWrapper}
-        onPress={clearStorage}
+        onPress={onButtonClick}
       >
-        <Icon
-          name="ios-trash"
-          size={35}
-          style={[styles.circleFixedButton, styles.circleFixedButtonDim]}
-        />
+        <Icon name="ios-add" size={45} style={styles.circleFixedButton} />
       </TouchableHighlight>
     </View>
   );
 };
 
-export default ClearStorageButton;
+export default AddGoalButton;
 
-ClearStorageButton.propTypes = {
-  clearStorage: PropTypes.func.isRequired
+AddGoalButton.propTypes = {
+  onButtonClick: PropTypes.func.isRequired
 };
