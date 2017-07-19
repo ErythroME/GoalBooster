@@ -1,28 +1,43 @@
-import React, { Component, PropTypes } from "react";
-import { View, Text, TextInput } from "react-native";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import Icon from "react-native-vector-icons/Ionicons";
+import React, { Component, PropTypes } from 'react'
+import { View, Text, TextInput } from 'react-native'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-import { ActionCreators } from "../actions";
-import theme from "../theme";
+import styled from 'styled-components/native'
+
+import { ActionCreators } from '../actions'
+import theme from '../theme'
+
+const AddGoalView = styled.View`
+  width: 100%;
+  height: 46px;
+  justify-content: center;
+  border-bottom-width: 0.5px;
+  border-color: #ddd;
+`
+const AddGoalText = styled.Text`
+  color: gray;
+  font-size: 16px;
+  margin-left: 25px;
+`
 
 class AddGoal extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = { text: "" };
-    this.addGoal = this.addGoal.bind(this);
-    this.renderInput = this.renderInput.bind(this);
+    this.state = { text: '' }
+    this.addGoal = this.addGoal.bind(this)
+    this.renderInput = this.renderInput.bind(this)
   }
 
   addGoal(event) {
-    const name = event.nativeEvent.text.trim();
+    const name = event.nativeEvent.text.trim()
     if (name) {
-      this.props.addGoal(name);
-      this.setState({ text: "" });
+      this.props.addGoal(name)
+      this.setState({ text: '' })
     } else {
-      this.props.toggleView();
+      this.props.toggleView()
     }
   }
 
@@ -36,32 +51,32 @@ class AddGoal extends Component {
         onBlur={this.props.toggleView}
         value={this.state.text}
       />
-    );
+    )
   }
 
   render() {
-    const { styles } = theme;
+    const { styles } = theme
     return (
-      <View style={styles.addGoal}>
+      <AddGoalView>
         {this.props.isInputShown
           ? this.renderInput(styles)
-          : <Text style={styles.addGoalText}>I have these goals...</Text>}
-      </View>
-    );
+          : <AddGoalText>I have these goals...</AddGoalText>}
+      </AddGoalView>
+    )
   }
 }
 
 function mapStateToProps(state) {
-  return { goals: state.goalRecipes.goals };
+  return { goals: state.goalRecipes.goals }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ActionCreators, dispatch);
+  return bindActionCreators(ActionCreators, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddGoal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddGoal)
 
 AddGoal.propTypes = {
   addGoal: PropTypes.func.isRequired,
   goals: PropTypes.array.isRequired
-};
+}

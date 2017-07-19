@@ -7,13 +7,10 @@ import renderer from 'react-test-renderer'
 import { mock, release } from 'mock-async-storage'
 import { AsyncStorage as storage } from 'react-native'
 
-
 mock()
 
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <App />
-  )
+  const tree = renderer.create(<App />)
 })
 
 it('Mock Async Storage working', async () => {

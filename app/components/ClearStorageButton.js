@@ -1,11 +1,11 @@
-import React, { PropTypes } from "react";
-import { View, Text, TouchableHighlight } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import React, { PropTypes } from 'react'
+import { View, Text, TouchableHighlight } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-import theme from "../theme";
+import theme from '../theme'
 
 const ClearStorageButton = ({ clearStorage }) => {
-  const { styles } = theme;
+  const { styles } = theme
   return (
     <View
       style={[
@@ -24,11 +24,11 @@ const ClearStorageButton = ({ clearStorage }) => {
         />
       </TouchableHighlight>
     </View>
-  );
-};
+  )
+}
 
-export default ClearStorageButton;
+export default ClearStorageButton
 
 ClearStorageButton.propTypes = {
   clearStorage: PropTypes.func.isRequired
-};
+}

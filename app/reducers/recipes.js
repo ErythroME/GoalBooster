@@ -4,7 +4,6 @@ import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 import * as keys from '../lib/storageKeys'
 
-
 const findGoalIndexById = (goals, id) => goals.findIndex(goal => goal.id === id)
 const toggleGoalState = (state, action) => {
   const index = findGoalIndexById(state, action.payload)
@@ -24,13 +23,15 @@ const getMaxIndex = async () => {
     console.log(`AsyncStorage error: ${err.message}`)
   }
 }
-const updateMaxIndex = async (index) => {
+const updateMaxIndex = async index => {
   try {
     await AsyncStorage.setItem(keys.INDEX_STORAGE_KEY, JSON.stringify(index))
-  } catch (err) { console.log(`AsyncStorage error: ${err.message}`) }
+  } catch (err) {
+    console.log(`AsyncStorage error: ${err.message}`)
+  }
 }
 let maxIndex = 0
-getMaxIndex().then((value) => {
+getMaxIndex().then(value => {
   maxIndex = value
 })
 
@@ -68,7 +69,8 @@ export const goalRecipes = createReducer(initialState, {
       goals: [
         ...state.goals,
         {
-          id, name,
+          id,
+          name,
           createAt: new Date(),
           achieved: false
         }
@@ -79,7 +81,7 @@ export const goalRecipes = createReducer(initialState, {
     const targetId = action.payload.id
     const goals = state.goals
     const index = findGoalIndexById(goals, targetId)
-    const currentGoals = [ ...goals ]
+    const currentGoals = [...goals]
     const removed = currentGoals.splice(index, 1)
     return { ...state, goals: currentGoals }
   },
@@ -87,11 +89,14 @@ export const goalRecipes = createReducer(initialState, {
     const { id, name } = action.payload
     const goals = state.goals
     const index = findGoalIndexById(goals, id)
-    const currentGoals = [ ...goals ]
+    const currentGoals = [...goals]
     const removed = currentGoals.splice(index, 1)
     const { createAt, achieved } = removed[0]
     const temp = currentGoals.splice(index, 0, {
-      id, name, createAt, achieved
+      id,
+      name,
+      createAt,
+      achieved
     })
     return { ...state, goals: currentGoals }
   },
@@ -113,17 +118,22 @@ const initialProgressObj = {
   total: 0,
   achieved: 0
 }
-const updateProgressStorage = async (progressObj) => {
+const updateProgressStorage = async progressObj => {
   try {
-    await AsyncStorage.setItem(keys.PROGRESS_STORAGE_KEY, JSON.stringify(progressObj))
-  } catch(err) { `AsyncStorage error: ${err.message}` }
+    await AsyncStorage.setItem(
+      keys.PROGRESS_STORAGE_KEY,
+      JSON.stringify(progressObj)
+    )
+  } catch (err) {
+    ;`AsyncStorage error: ${err.message}`
+  }
 }
 export const progressRecipes = createReducer(initialProgressObj, {
   [types.RECEIVE_PROGRESS](state, action) {
     const progressObj = action.payload.total ? action.payload : state
     return { ...progressObj }
   },
-  [types.CLEAR_PROGRESS](state, action){
+  [types.CLEAR_PROGRESS](state, action) {
     return { ...initialProgressObj }
   },
   [types.ADD_GOAL](state, action) {
