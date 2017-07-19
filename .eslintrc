@@ -1,0 +1,11 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "rules": {
+    "accessor-pairs": 2,
+    "brace-style": [2, "ltbs", { "allowSingleLine": true }],
+    "comma-dangle": [2, "naver"],
+    "comma-spacing": [2, { "before": false, "after", true }],
+    "comma-style": [2, "last"]
+  }
+}

@@ -1,17 +1,24 @@
 import React, { Component, PropTypes } from 'react'
-import {
-  View,
-  Text,
-  TextInput
-} from 'react-native'
+import { View, Text, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Swipeout from 'react-native-swipeout'
 
-import { ActionCreators } from '../actions'
 import theme from '../theme'
+import styled from 'styled-components/native'
+
+import { ActionCreators } from '../actions'
 import Checkbox from '../components/Checkbox'
 
+const GoalItemView = styled.View`
+  width: 100%;
+  height: 46px;
+  align-items: center;
+  border-bottom-width: 0.5px;
+  border-color: #eee;
+  padding-left: 15px;
+  flex-direction: row;
+`
 
 class Goal extends Component {
   constructor(props) {
@@ -57,19 +64,22 @@ class Goal extends Component {
         onPress: () => this.handleGoalDelete(id)
       }
     ]
-    return(
+    return (
       <Swipeout
-        style={styles.swipeoutStyles}
         autoClose={true}
-        right={swipeoutButtons}>
-        <View style={styles.goalItem}>
+        right={swipeoutButtons}
+        style={{ backgroundColor: 'transparent' }}
+      >
+        <GoalItemView>
           <Checkbox
             targetId={id}
             handleCheck={this.handleGoalCheck}
             isChecked={this.props.goal.achieved}
           />
-          <Text>{name}</Text>
-        </View>
+          <Text>
+            {name}
+          </Text>
+        </GoalItemView>
       </Swipeout>
     )
   }
@@ -88,15 +98,15 @@ class Goal extends Component {
 
   renderInput(styles) {
     return (
-      <View style={styles.goalItem}>
+      <GoalItemView>
         <TextInput
           style={styles.goalInput}
           autoFocus={true}
-          onChangeText={text => this.setState({text})}
+          onChangeText={text => this.setState({ text })}
           onSubmitEditing={event => this.editGoal(event)}
           value={this.state.text}
         />
-      </View>
+      </GoalItemView>
     )
   }
 

@@ -2,7 +2,6 @@ import { AsyncStorage } from 'react-native'
 import * as types from './types'
 import * as keys from '../lib/storageKeys'
 
-
 export function fetchGoals() {
   return async function(dispatch) {
     dispatch(requestGoals())
@@ -58,7 +57,9 @@ export function clearStorage() {
       await AsyncStorage.clear()
       dispatch(clearProgress())
       dispatch(fetchGoals())
-    } catch (err) { console.log(`AsyncStorage error: ${err.message}`) }
+    } catch (err) {
+      console.log(`AsyncStorage error: ${err.message}`)
+    }
   }
 }
 
